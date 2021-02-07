@@ -1,9 +1,13 @@
 <template>
-  <div id="app">
-    Hello!
+  <div>
+    <router-view></router-view>
   </div>
 </template>
 
-<style lang="scss">
+<script>
+
+</script>
+
+<style lang='scss'>
 
 </style>
