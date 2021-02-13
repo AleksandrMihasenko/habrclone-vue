@@ -1,41 +1,55 @@
 <template>
   <div class='container'>
-    <div class='row section'>
-      <form class='offset-l3 col l6' v-on:submit.prevent='submitHandler'>
-        <div class='card lighten-2'>
-          <div class='card-content'>
-            <span class='grey-text text-darken-2'>Вход</span>
+    <div class='row'>
+      <form v-on:submit.prevent='submitHandler' class='card-auth col s6 offset-s3'>
+        <div class='card-auth_content'>
+          <span class='card-auth_content_title'>Регистрация</span>
 
-            <div class='row'>
-              <div class='input-field col s12'>
-                <input id='email' type='email' class='validate'>
-                <label class='grey-text text-darken-2' for='email'>E-mail</label>
-              </div>
-            </div>
+          <div class='card-auth_content_field input-field'>
+            <label for='email'>Email</label>
+            <input id='email' type='text'>
+          </div>
 
-            <div class='row'>
-              <div class='input-field col s12'>
-                <input id='password' type='password' class='validate'>
-                <label class='grey-text text-darken-2' for='password'>Пароль</label>
-              </div>
-            </div>
+          <div class='card-auth_content_field input-field'>
+            <label for='name'>Имя</label>
+            <input id='name' type='text'>
+          </div>
 
-            <button class='col s12 btn waves-effect waves-light blue darken-3' type='submit' name='action'>
-              <router-link v-bind:to="{name: 'login'}">Войти</router-link>
+          <div class='card-auth_content_field input-field'>
+            <label for='password'>Пароль</label>
+            <input id='password' type='password'>
+          </div>
+
+          <p>
+            <label>
+              <input type='checkbox'>
+              <span>С правилами согласен</span>
+            </label>
+          </p>
+
+          <div>
+            <button class='card-auth_content_btn btn waves-effect waves-light'>
+              Зарегистрироваться
+              <i class='material-icons right'>send</i>
             </button>
-            <div class='card-action'>
-              <p>
-                <a href='#' class='blue-text text-darken-2'>
-                  <router-link v-bind:to="{name: 'login'}">Не зарегистрированы?</router-link>
-                </a>
-              </p>
-            </div>
           </div>
         </div>
       </form>
     </div>
+
+    <div class='row'>
+      <div class='card-link col s6 offset-s3'>
+        <p class='center'>
+          Уже зарегистрированы?
+<!--          <router-link v-bind='{name: "login"}'>Войдите</router-link>-->
+        </p>
+      </div>
+    </div>
   </div>
+
+
 </template>
+
 
 <script>
 export default {
@@ -48,6 +62,32 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang='sass'>
 
+.card-auth
+  margin-top: 100px
+  background-color: aliceblue
+
+  &_content
+    padding: 40px 30px
+
+    &_title
+      display: block
+      color: #444
+      font-size: 22px
+      font-weight: 700
+      margin-bottom: 40px
+
+    &_field
+      margin-bottom: 30px
+
+    &_btn
+      width: 100%
+      margin-top: 60px
+      height: 50px
+
+.card-link
+  margin-top: 15px
+  background-color: aliceblue
+  height: 50px
 </style>
