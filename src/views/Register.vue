@@ -28,7 +28,7 @@
           </p>
 
           <div>
-            <button class='card-auth_content_btn btn waves-effect waves-light'>
+            <button v-bind:disabled='isSubmitting' class='card-auth_content_btn btn waves-effect waves-light'>
               Зарегистрироваться
               <i class='material-icons right'>send</i>
             </button>
@@ -42,7 +42,7 @@
       <div class='card-link col s6 offset-s3'>
         <p class='center'>
           Уже зарегистрированы?
-<!--          <router-link v-bind='{name: "login"}'>Войдите</router-link>-->
+          <router-link v-bind='{name: "login"}'>Войдите</router-link>
         </p>
       </div>
     </div>
@@ -58,9 +58,12 @@ export default {
   methods: {
     submitHandler() {
       console.log('click');
-    },
-    increaseCounter() {
-      this.$store.commit('increment')
+      this.$store.commit('registerStart');
+    }
+  },
+  computed: {
+    isSubmitting() {
+      return this.$store.state.auth.isSubmitting;
     }
   }
 };
@@ -92,6 +95,9 @@ export default {
 
 .card-link
   margin-top: 15px
-  background-color: aliceblue
+  background-color: $clear
   height: 50px
+
+.btn-disabled
+  opacity: .7
 </style>
