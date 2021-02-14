@@ -10,5 +10,5 @@
 
 <style lang='sass'>
 body
-  background-color: #e2e2e2
+  background-color: $base-bg
 </style>

@@ -32,6 +32,7 @@
               Зарегистрироваться
               <i class='material-icons right'>send</i>
             </button>
+
           </div>
         </div>
       </form>
@@ -57,6 +58,9 @@ export default {
   methods: {
     submitHandler() {
       console.log('click');
+    },
+    increaseCounter() {
+      this.$store.commit('increment')
     }
   }
 };
@@ -66,14 +70,14 @@ export default {
 
 .card-auth
   margin-top: 100px
-  background-color: aliceblue
+  background-color: $clear
 
   &_content
     padding: 40px 30px
 
     &_title
       display: block
-      color: #444
+      color: $base-text
       font-size: 22px
       font-weight: 700
       margin-bottom: 40px
