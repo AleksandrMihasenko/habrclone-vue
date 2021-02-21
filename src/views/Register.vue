@@ -57,8 +57,13 @@ export default {
   name: 'HcvRegister',
   methods: {
     submitHandler() {
-      console.log('click');
-      this.$store.commit('registerStart');
+      this.$store.dispatch('register', {
+        email: 'asfgdfvdeghd@hjy.com',
+        username: 'afddhehfdgdg',
+        password: '12345678'
+      }).then(user => {
+        console.log('register was success', user);
+      });
     }
   },
   computed: {
