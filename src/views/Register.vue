@@ -7,22 +7,22 @@
 
           <div class='card-auth_content_field input-field'>
             <label for='email'>Email</label>
-            <input id='email' type='text'>
+            <input v-model='email' id='email' type='text'>
           </div>
 
           <div class='card-auth_content_field input-field'>
-            <label for='name'>Имя</label>
-            <input id='name' type='text'>
+            <label for='username'>Имя</label>
+            <input v-model='username' id='username' type='text'>
           </div>
 
           <div class='card-auth_content_field input-field'>
             <label for='password'>Пароль</label>
-            <input id='password' type='password'>
+            <input v-model='password' id='password' type='password'>
           </div>
 
           <p>
             <label>
-              <input type='checkbox'>
+              <input v-model='check' type='checkbox'>
               <span>С правилами согласен</span>
             </label>
           </p>
@@ -42,7 +42,7 @@
       <div class='card-link col s6 offset-s3'>
         <p class='center'>
           Уже зарегистрированы?
-          <router-link v-bind='{name: "login"}'>Войдите</router-link>
+<!--          <router-link v-bind='{name: "login"}'>Войдите</router-link>-->
         </p>
       </div>
     </div>
@@ -55,14 +55,24 @@
 <script>
 export default {
   name: 'HcvRegister',
+  data() {
+    return {
+      email: '',
+      username: '',
+      password: '',
+      check: false
+    }
+  },
   methods: {
     submitHandler() {
       this.$store.dispatch('register', {
-        email: 'asfgdfvdeghd@hjy.com',
-        username: 'afddhehfdgdg',
-        password: '12345678'
-      }).then(user => {
+        email: this.email,
+        username: this.username,
+        password: this.password
+      })
+      .then(user => {
         console.log('register was success', user);
+        this.$router.push({ name: 'home' })
       });
     }
   },

@@ -2,29 +2,36 @@ import authApi from '@/api/auth';
 
 
 const state = {
-  isSubmitting: false
+  isSubmitting: false,
+  currentUsers: null,
+  validationErrors: null,
+  isLogIn: null
 };
 
 const mutations = {
   registerStart(state) {
     state.isSubmitting = true;
+    state.validationErrors = null;
   },
-  registerSuccess(state) {
+  registerSuccess(state, user) {
     state.isSubmitting = false;
+    state.currentUsers = user;
+    state.isLogIn = true;
   },
-  registerFailure(state) {
+  registerFailure(state, user) {
     state.isSubmitting = false;
+    state.validationErrors = user;
   }
 };
 
 const actions = {
   register(context, credentials) {
     return new Promise(resolve => {
+      
       context.commit('registerStart');
       
       authApi.register(credentials)
         .then(response => {
-          console.log('success', response);
           context.commit('registerSuccess', response.data.user);
           resolve(response.data.user);
         })
@@ -32,6 +39,7 @@ const actions = {
           console.log(errors);
           context.commit('registerFailure', errors.response.data.errors);
         });
+      
     });
   }
 };
