@@ -1,5 +1,7 @@
 import authApi from '@/api/auth';
 
+import { setItem } from '@/utils/localStorage';
+
 
 const state = {
   isSubmitting: false,
@@ -33,6 +35,7 @@ const actions = {
       authApi.register(credentials)
         .then(response => {
           context.commit('registerSuccess', response.data.user);
+          setItem('accessToken', response.data.user.token);
           resolve(response.data.user);
         })
         .catch(errors => {
