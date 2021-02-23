@@ -22,7 +22,7 @@
           </div>
 
           <div>
-            <button class='card-auth_content_btn btn waves-effect waves-light'>
+            <button v-bind:disabled='isSubmitting' class='card-auth_content_btn btn waves-effect waves-light'>
               Войти
               <i class='material-icons right'>send</i>
             </button>
@@ -65,6 +65,18 @@ export default {
         return ;
       }
 
+      this.$store.dispatch('login', {
+        email: this.email,
+        password: this.password
+      })
+      .then(() => {
+        this.$router.push({ name: 'home' })
+      });
+    }
+  },
+  computed: {
+    isSubmitting() {
+      return this.$store.state.auth.isSubmitting;
     }
   }
 };

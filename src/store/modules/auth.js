@@ -23,6 +23,19 @@ const mutations = {
   registerFailure(state, user) {
     state.isSubmitting = false;
     state.validationErrors = user;
+  },
+  loginStart(state) {
+    state.isSubmitting = true;
+    state.validationErrors = null;
+  },
+  loginSuccess(state, user) {
+    state.isSubmitting = false;
+    state.currentUsers = user;
+    state.isLogIn = true;
+  },
+  loginFailure(state, user) {
+    state.isSubmitting = false;
+    state.validationErrors = user;
   }
 };
 
@@ -43,6 +56,24 @@ const actions = {
           context.commit('registerFailure', errors.response.data.errors);
         });
       
+    });
+  },
+  login(context, credentials) {
+    return new Promise(resolve => {
+    
+      context.commit('loginStart');
+    
+      authApi.login(credentials)
+      .then(response => {
+        context.commit('loginSuccess', response.data.user);
+        setItem('accessToken', response.data.user.token);
+        resolve(response.data.user);
+      })
+      .catch(errors => {
+        console.log(errors);
+        context.commit('loginFailure', errors.response.data.errors);
+      });
+    
     });
   }
 };
