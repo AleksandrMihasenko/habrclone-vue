@@ -53,7 +53,7 @@
       <div class='card-link col s6 offset-s3'>
         <p class='center'>
           Уже зарегистрированы?
-          <router-link to='{ name: "login" }'>Войдите</router-link>
+          <router-link v-bind:to='{ name: "login" }'>Войдите</router-link>
         </p>
       </div>
     </div>

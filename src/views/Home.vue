@@ -8,6 +8,7 @@
 
 <script>
 import M from 'materialize-css';
+
 export default {
   name: 'Home',
   mounted() {

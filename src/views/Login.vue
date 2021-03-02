@@ -35,7 +35,7 @@
       <div class='card-link col s6 offset-s3'>
         <p class='center'>
           Не зарегистрированы?
-          <router-link to='{ name: "register" }'>Зарегистрируйтесь</router-link>
+          <router-link v-bind:to='{ name: "register" }'>Зарегистрируйтесь</router-link>
         </p>
       </div>
     </div>
@@ -47,7 +47,7 @@
 import { email, required, minLength } from 'vuelidate/lib/validators';
 
 export default {
-  name: 'Login',
+  name: 'HcvLogin',
   data () {
     return {
       email: '',
