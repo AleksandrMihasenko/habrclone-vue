@@ -35,3 +35,10 @@ export default {
   }
 }
 </script>
+
+<style lang='sass'>
+.nav-wrapper
+  background-color: #303b44
+  .brand-logo
+    left: 1%
+</style>
