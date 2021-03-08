@@ -1,17 +1,21 @@
 <template>
   <div>
-    <hcv-navbar></hcv-navbar>
-    
-    <router-view></router-view>
+    <component :is='layout'></component>
   </div>
 </template>
 
 <script>
-import HcvNavbar from '@/components/Navbar';
+import MainLayout from '@/layouts/MainLayout';
+import AuthLayout from '@/layouts/AuthLayout';
 
 export default {
   name: 'HcvApp',
-  components: { HcvNavbar }
+  components: { MainLayout, AuthLayout },
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || 'auth') + '-layout';
+    }
+  }
 }
 </script>
 
