@@ -7,26 +7,38 @@
 
           <div class='card-auth_content_field input-field'>
             <label for='email'>Email</label>
-            <input v-model.trim='email' v-bind:class='{ invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email) }' id='email' type='text'>
+            <input v-model.trim='email'
+                   v-bind:class='{ invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email) }'
+                   id='email' type='text'>
 
-            <span class='invalid-error' v-if='($v.email.$dirty && !$v.email.required)'>Поле email должно быть заполнено.</span>
-            <span class='invalid-error' v-else-if='($v.email.$dirty && !$v.email.email)'>Email должен быть корректным.</span>
+            <span class='invalid-error'
+                  v-if='($v.email.$dirty && !$v.email.required)'>Поле email должно быть заполнено.</span>
+            <span class='invalid-error'
+                  v-else-if='($v.email.$dirty && !$v.email.email)'>Email должен быть корректным.</span>
+            <span class='invalid-error' v-if='validationErrors.email'>Эта почта уже занята.</span>
           </div>
 
           <div class='card-auth_content_field input-field'>
             <label for='username'>Имя</label>
-            <input v-model='username' v-bind:class='{ invalid: ($v.username.$dirty && !$v.username.required) || ($v.username.$dirty && !$v.username.minLength) }' id='username' type='text'>
+            <input v-model='username'
+                   v-bind:class='{ invalid: ($v.username.$dirty && !$v.username.required) || ($v.username.$dirty && !$v.username.minLength) }'
+                   id='username' type='text'>
 
             <span class='invalid-error' v-if='($v.username.$dirty && !$v.username.required)'>Поле username должно быть заполнено.</span>
-            <span class='invalid-error' v-else-if='($v.username.$dirty && !$v.username.minLength)'>Поле должно содержать минимум {{ $v.username.$params.minLength.min }} символов. Сейчас {{ username.length }}</span>
+            <span class='invalid-error' v-else-if='($v.username.$dirty && !$v.username.minLength)'>Поле должно содержать минимум {{ $v.username.$params.minLength.min
+              }} символов. Сейчас {{ username.length }}</span>
+            <span class='invalid-error' v-if='validationErrors.username'>Это имя уже занято.</span>
           </div>
 
           <div class='card-auth_content_field input-field'>
             <label for='password'>Пароль</label>
-            <input v-model.trim='password' v-bind:class='{ invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength) }' id='password' type='password'>
+            <input v-model.trim='password'
+                   v-bind:class='{ invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength) }'
+                   id='password' type='password'>
 
             <span class='invalid-error' v-if='($v.password.$dirty && !$v.password.required)'>Поле password должно быть заполнено.</span>
-            <span class='invalid-error' v-else-if='($v.password.$dirty && !$v.password.minLength)'>Поле должно содержать минимум {{ $v.password.$params.minLength.min }} символов. Сейчас {{ password.length }}</span>
+            <span class='invalid-error' v-else-if='($v.password.$dirty && !$v.password.minLength)'>Поле должно содержать минимум {{ $v.password.$params.minLength.min
+              }} символов. Сейчас {{ password.length }}</span>
           </div>
 
           <p>
@@ -72,8 +84,9 @@ export default {
       email: '',
       username: '',
       password: '',
-      checkbox: false
-    }
+      checkbox: false,
+      validationErrors: {}
+    };
   },
   validations: {
     email: { email, required },
@@ -85,7 +98,7 @@ export default {
     submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
-        return ;
+        return;
       }
 
       this.$store.dispatch('register', {
@@ -95,10 +108,10 @@ export default {
       })
       .then(user => {
         console.log('register was success', user);
-        this.$router.push({ name: 'home' })
+        this.$router.push({ name: 'home' });
       })
       .catch(error => {
-        console.log('register wasn\'t success', error)
+        this.validationErrors = error;
       });
     }
   },

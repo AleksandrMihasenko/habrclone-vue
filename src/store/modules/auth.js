@@ -46,23 +46,23 @@ const actions = {
       context.commit('registerStart');
       
       authApi.register(credentials)
-        .then(response => {
-          context.commit('registerSuccess', response.data.user);
-          setItem('accessToken', response.data.user.token);
-          resolve(response.data.user);
-        })
-        .catch(errors => {
-          context.commit('registerFailure', errors.response.data.errors);
-          reject(errors.response.data.errors);
-        });
+      .then(response => {
+        context.commit('registerSuccess', response.data.user);
+        setItem('accessToken', response.data.user.token);
+        resolve(response.data.user);
+      })
+      .catch(errors => {
+        context.commit('registerFailure', errors.response.data.errors);
+        reject(errors.response.data.errors);
+      });
       
     });
   },
   login(context, credentials) {
-    return new Promise(resolve => {
-    
+    return new Promise((resolve, reject) => {
+      
       context.commit('loginStart');
-    
+      
       authApi.login(credentials)
       .then(response => {
         context.commit('loginSuccess', response.data.user);
@@ -72,8 +72,9 @@ const actions = {
       .catch(errors => {
         console.log(errors);
         context.commit('loginFailure', errors.response.data.errors);
+        reject(errors.response.data.errors);
       });
-    
+      
     });
   }
 };

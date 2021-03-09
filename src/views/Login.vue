@@ -7,18 +7,27 @@
 
           <div class='card-auth_content_field input-field'>
             <label for='email'>Email</label>
-            <input v-model.trim='email' v-bind:class='{ invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email) }' id='email' type='text'>
+            <input v-model.trim='email'
+                   v-bind:class='{ invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email) }'
+                   id='email' type='text'>
 
-            <span class='invalid-error' v-if='($v.email.$dirty && !$v.email.required)'>Поле email должно быть заполнено.</span>
-            <span class='invalid-error' v-else-if='($v.email.$dirty && !$v.email.email)'>Email должен быть корректным.</span>
+            <span class='invalid-error'
+                  v-if='($v.email.$dirty && !$v.email.required)'>Поле email должно быть заполнено.</span>
+            <span class='invalid-error'
+                  v-else-if='($v.email.$dirty && !$v.email.email)'>Email должен быть корректным.</span>
+            <span class='invalid-error' v-if='validationErrors["email or password"]'>Некорректный email.</span>
           </div>
 
           <div class='card-auth_content_field input-field'>
             <label for='password'>Пароль</label>
-            <input v-model.trim='password' v-bind:class='{ invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength) }' id='password' type='password'>
+            <input v-model.trim='password'
+                   v-bind:class='{ invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength) }'
+                   id='password' type='password'>
 
             <span class='invalid-error' v-if='($v.password.$dirty && !$v.password.required)'>Поле password должно быть заполнено.</span>
-            <span class='invalid-error' v-else-if='($v.password.$dirty && !$v.password.minLength)'>Поле должно содержать минимум {{ $v.password.$params.minLength.min }} символов. Сейчас {{ password.length }}</span>
+            <span class='invalid-error' v-else-if='($v.password.$dirty && !$v.password.minLength)'>Поле должно содержать минимум {{ $v.password.$params.minLength.min
+              }} символов. Сейчас {{ password.length }}</span>
+            <span class='invalid-error' v-if='validationErrors["email or password"]'>Некорректный пароль.</span>
           </div>
 
           <div>
@@ -48,11 +57,12 @@ import { email, required, minLength } from 'vuelidate/lib/validators';
 
 export default {
   name: 'HcvLogin',
-  data () {
+  data() {
     return {
       email: '',
-      password: ''
-    }
+      password: '',
+      validationErrors: {}
+    };
   },
   validations: {
     email: { email, required },
@@ -62,7 +72,7 @@ export default {
     submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
-        return ;
+        return;
       }
 
       this.$store.dispatch('login', {
@@ -70,7 +80,11 @@ export default {
         password: this.password
       })
       .then(() => {
-        this.$router.push({ name: 'home' })
+        this.$router.push({ name: 'home' });
+      })
+      .catch(error => {
+        this.validationErrors = error;
+        console.log(error);
       });
     }
   },
