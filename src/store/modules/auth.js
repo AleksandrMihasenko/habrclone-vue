@@ -5,7 +5,7 @@ import { setItem } from '@/utils/localStorage';
 
 const state = {
   isSubmitting: false,
-  currentUsers: null,
+  currentUser: null,
   validationErrors: null,
   isLogIn: null
 };
@@ -17,7 +17,7 @@ const mutations = {
   },
   registerSuccess(state, user) {
     state.isSubmitting = false;
-    state.currentUsers = user;
+    state.currentUser = user;
     state.isLogIn = true;
   },
   registerFailure(state, user) {
@@ -30,7 +30,7 @@ const mutations = {
   },
   loginSuccess(state, user) {
     state.isSubmitting = false;
-    state.currentUsers = user;
+    state.currentUser = user;
     state.isLogIn = true;
   },
   loginFailure(state, user) {
@@ -41,7 +41,7 @@ const mutations = {
 
 const actions = {
   register(context, credentials) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       
       context.commit('registerStart');
       
@@ -52,8 +52,8 @@ const actions = {
           resolve(response.data.user);
         })
         .catch(errors => {
-          console.log(errors);
           context.commit('registerFailure', errors.response.data.errors);
+          reject(errors.response.data.errors);
         });
       
     });

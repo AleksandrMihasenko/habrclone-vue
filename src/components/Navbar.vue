@@ -29,7 +29,7 @@ export default {
   name: 'HcvNavbar',
   computed: {
     ...mapState({
-      currentUser: state => state.auth.currentUsers,
+      currentUser: state => state.auth.currentUser,
       isLogIn: state => state.auth.isLogIn
       })
   }

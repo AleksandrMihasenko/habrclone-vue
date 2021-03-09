@@ -96,6 +96,9 @@ export default {
       .then(user => {
         console.log('register was success', user);
         this.$router.push({ name: 'home' })
+      })
+      .catch(error => {
+        console.log('register wasn\'t success', error)
       });
     }
   },
