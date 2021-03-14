@@ -1,44 +1,64 @@
 <template>
-<div class="navbar-fixed">
-  <nav>
-    <div class="nav-wrapper">
-      <router-link v-bind:to='{name: "home"}' class="brand-logo">Habr clone</router-link>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><router-link v-bind:to='{name: "home"}' active-class="active" exact>Главная страница</router-link></li>
+  <div class='navbar-fixed'>
+    <nav>
+      <div class='nav-wrapper'>
+        <router-link v-bind:to='{name: "home"}' class='brand-logo'>Habr clone</router-link>
+        <ul id='nav-mobile' class='right hide-on-med-and-down'>
+          <li>
+            <router-link v-bind:to='{name: "home"}' active-class='active' exact>Главная страница</router-link>
+          </li>
 
-        <template v-if="isLogIn">
-          <li><router-link v-bind:to='{name: "createArticle"}'>Новая статья</router-link></li>
-          <li><router-link v-bind:to='{name: "settings"}'>Настройки</router-link></li>
-          <li><router-link v-bind:to='{name: "userProfile, params: {slug: currentUser.username}"}'>{{ currentUser.username }}</router-link></li>
-        </template>
+          <template v-if='isLogIn'>
+            <li>
+              <router-link v-bind:to='{name: "createArticle"}'>Новая статья</router-link>
+            </li>
+            <li>
+              <router-link v-bind:to='{name: "settings"}'>Настройки</router-link>
+            </li>
+            <li>
+              <router-link v-bind:to='{name: "userProfile, params: {slug: currentUser.username}"}'>
+                {{ currentUser.username }}
+              </router-link>
+            </li>
+          </template>
 
-        <template v-if="!isLogIn">
-          <li><router-link v-bind:to='{name: "login"}'>Войти</router-link></li>
-          <li><router-link v-bind:to='{name: "register"}'>Зарегистрироваться</router-link></li>
-        </template>
-      </ul>
-    </div>
-  </nav>
-</div>
+          <template v-if='isAnonymous'>
+            <li>
+              <router-link v-bind:to='{name: "login"}'>Войти</router-link>
+            </li>
+            <li>
+              <router-link v-bind:to='{name: "register"}'>Зарегистрироваться</router-link>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'HcvNavbar',
   computed: {
-    ...mapState({
-      currentUser: state => state.auth.currentUser,
-      isLogIn: state => state.auth.isLogIn
-      })
+    ...mapGetters({
+      currentUser: 'currentUser',
+      isLogIn: 'isLogIn',
+      isAnonymous: 'isAnonymous'
+    })
   }
-}
+};
 </script>
 
 <style lang='sass'>
+
+.active
+  background-color: #29333b
+
 .nav-wrapper
   background-color: #303b44
+
   .brand-logo
     left: 1%
 </style>

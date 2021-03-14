@@ -39,6 +39,18 @@ const mutations = {
   }
 };
 
+const getters = {
+  currentUser: state => {
+    return state.currentUser;
+  },
+  isLogIn: state => {
+    return Boolean(state.isLogIn);
+  },
+  isAnonymous: state => {
+    return state.isLogIn === false;
+  }
+}
+
 const actions = {
   register(context, credentials) {
     return new Promise((resolve, reject) => {
@@ -82,5 +94,6 @@ const actions = {
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters
 };
