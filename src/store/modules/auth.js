@@ -7,7 +7,8 @@ const state = {
   isSubmitting: false,
   currentUser: null,
   validationErrors: null,
-  isLogIn: null
+  isLogIn: null,
+  isLoading: false
 };
 
 const mutations = {
@@ -36,6 +37,19 @@ const mutations = {
   loginFailure(state, user) {
     state.isSubmitting = false;
     state.validationErrors = user;
+  },
+  getCurrentUserStart(state) {
+    state.isLoading = true;
+  },
+  getCurrentUserSuccess(state, user) {
+    state.isLoading = false;
+    state.currentUser = user;
+    state.isLogIn = true;
+  },
+  getCurrentUserFailure(state) {
+    state.isLoading = false;
+    state.isLogIn = false;
+    state.currentUser = null;
   }
 };
 
@@ -87,6 +101,21 @@ const actions = {
         reject(errors.response.data.errors);
       });
       
+    });
+  },
+  getCurrentUser(context) {
+    return new Promise((resolve) => {
+    
+      context.commit('getCurrentUserStart');
+    
+      authApi.getCurrentUser()
+      .then(response => {
+        context.commit('getCurrentUserSuccess', response.data.user);
+        resolve(response.data.user);
+      })
+      .catch(() => {
+        context.commit('getCurrentUserFailure');
+      });
     });
   }
 };

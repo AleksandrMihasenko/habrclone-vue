@@ -15,8 +15,11 @@ export default {
     layout() {
       return (this.$route.meta.layout || 'auth') + '-layout';
     }
+  },
+  mounted() {
+    this.$store.dispatch('getCurrentUser');
   }
-}
+};
 </script>
 
 <style lang='sass'>
