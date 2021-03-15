@@ -2,10 +2,10 @@
   <div class='navbar-fixed'>
     <nav>
       <div class='nav-wrapper'>
-        <router-link v-bind:to='{name: "home"}' class='brand-logo'>Habr clone</router-link>
+        <router-link v-bind:to='{name: "globalFeed"}' class='brand-logo'>Habr clone</router-link>
         <ul id='nav-mobile' class='right hide-on-med-and-down'>
           <li>
-            <router-link v-bind:to='{name: "home"}' active-class='active' exact>Главная страница</router-link>
+            <router-link v-bind:to='{name: "globalFeed"}' active-class='active' exact>Главная страница</router-link>
           </li>
 
           <template v-if='isLogIn'>

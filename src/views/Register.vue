@@ -106,9 +106,9 @@ export default {
         username: this.username,
         password: this.password
       })
+      // eslint-disable-next-line no-unused-vars
       .then(user => {
-        console.log('register was success', user);
-        this.$router.push({ name: 'home' });
+        this.$router.push({ name: 'globalFeed' });
       })
       .catch(error => {
         this.validationErrors = error;
