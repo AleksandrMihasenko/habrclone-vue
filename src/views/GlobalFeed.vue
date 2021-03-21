@@ -54,7 +54,6 @@ export default {
       width: 75%
       min-height: 100%
       margin-right: 20px
-      padding: 20px
     &_tags
       width: 25%
       height: 300px
