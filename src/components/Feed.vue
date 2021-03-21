@@ -1,10 +1,16 @@
 <template>
-  <div>Feed</div>
+  <div>Feed {{ apiUrl }}</div>
 </template>
 
 <script>
 export default {
-  name: 'HcvFeed'
+  name: 'HcvFeed',
+  props: {
+    apiUrl: {
+      type: String,
+      required: true
+    }
+  }
 };
 </script>
 

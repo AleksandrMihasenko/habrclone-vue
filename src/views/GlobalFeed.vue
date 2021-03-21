@@ -6,10 +6,12 @@
       <div class='col s12 feed_content'>
         <div class='col s8 feed_content_articles'>
           There will be all articles
-          <hcv-feed></hcv-feed>
+          <hcv-feed v-bind:api-url='apiUrl'></hcv-feed>
         </div>
 
-        <div class='col s4 feed_content_tags'>There will be all tags</div>
+        <div class='col s4 feed_content_tags'>
+          There will be all tags
+        </div>
       </div>
     </div>
   </div>
@@ -21,6 +23,11 @@ import M from 'materialize-css';
 
 export default {
   name: 'HcvGlobalFeed',
+  data() {
+    return {
+      apiUrl: '/articles'
+    }
+  },
   components: { HcvFeed },
   mounted() {
     M.AutoInit();
