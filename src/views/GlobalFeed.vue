@@ -5,7 +5,6 @@
 
       <div class='col s12 feed_content'>
         <div class='col s8 feed_content_articles'>
-          There will be all articles
           <hcv-feed v-bind:api-url='apiUrl'></hcv-feed>
         </div>
 
