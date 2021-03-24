@@ -30,20 +30,37 @@
         <div class='articles_preview_likes'></div>
       </div>
     </div>
+
+    <hcv-pagination
+      v-bind:total='total'
+      v-bind:limit='limit'
+      v-bind:current-page='currentPage'
+      v-bind:url='url'
+    ></hcv-pagination>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import HcvPagination from '@/components/Pagination';
 
 export default {
   name: 'HcvFeed',
+  data() {
+    return {
+      total: 500,
+      limit: 10,
+      currentPage: 5,
+      url: '/'
+    }
+  },
   props: {
     apiUrl: {
       type: String,
       required: true
     }
   },
+  components: { HcvPagination },
   computed: {
     ...mapState({
       isLoading: state => state.feed.isLoading,
