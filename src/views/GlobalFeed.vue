@@ -8,8 +8,8 @@
           <hcv-feed v-bind:api-url='apiUrl'></hcv-feed>
         </div>
 
-        <div class='col s4 feed_content_tags'>
-          There will be all tags
+        <div class='col s4'>
+          <hcv-tags></hcv-tags>
         </div>
       </div>
     </div>
@@ -18,6 +18,7 @@
 
 <script>
 import HcvFeed from '@/components/Feed';
+import HcvTags from '@/components/Tags';
 import M from 'materialize-css';
 
 export default {
@@ -27,7 +28,7 @@ export default {
       apiUrl: '/articles'
     }
   },
-  components: { HcvFeed },
+  components: { HcvFeed, HcvTags },
   mounted() {
     M.AutoInit();
   }
