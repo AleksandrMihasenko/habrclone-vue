@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: '/feed',
-    name: 'feed',
+    name: 'userFeed',
     meta: { layout: "main" },
     component: UserFeed
   },

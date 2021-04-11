@@ -3,9 +3,6 @@
     <hcv-loading v-if='isLoading'>Loading...</hcv-loading>
 
     <div v-else class='col s12 articles'>
-
-      <div v-if='error'>Error</div>
-
       <div v-if='data'>
         <div class='articles_preview' v-for='(article, index) in data.articles' v-bind:key='index'>
           <div class='articles_preview_info'>
@@ -23,8 +20,6 @@
 
           <div class='articles_preview_tags'>
             <span>{{ article.tagList }}</span>
-            <span>test</span>
-            <span>test</span>
           </div>
 
           <div class='articles_preview_descr'>{{ article.description }}</div>
@@ -52,10 +47,10 @@
 <script>
 import { mapState } from 'vuex';
 import HcvPagination from '@/components/Pagination';
+import HcvLoading from '@/components/Loading';
+import HcvError from '@/components/Error';
 import { limit } from '@/utils/vars';
 import { stringify, parseUrl } from 'query-string';
-import HcvLoading from '@/components/Loading';
-import HcvError from '@/components/Error'
 
 export default {
   name: 'HcvFeed',

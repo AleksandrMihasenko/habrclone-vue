@@ -3,6 +3,8 @@
     <div class='row feed'>
       <div class='col s12 feed_content'>
         <div class='col s8 feed_content_articles'>
+          <hcv-feed-links></hcv-feed-links>
+
           <hcv-feed v-bind:api-url='apiUrl'></hcv-feed>
         </div>
 
@@ -17,6 +19,7 @@
 <script>
 import HcvFeed from '@/components/Feed';
 import HcvTags from '@/components/Tags';
+import HcvFeedLinks from '@/components/FeedLinks';
 import M from 'materialize-css';
 
 export default {
@@ -26,7 +29,7 @@ export default {
       apiUrl: '/articles'
     }
   },
-  components: { HcvFeed, HcvTags },
+  components: { HcvFeed, HcvTags, HcvFeedLinks },
   mounted() {
     M.AutoInit();
   }
