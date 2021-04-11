@@ -3,24 +3,25 @@
     <hcv-loading v-if='isLoading'></hcv-loading>
 
     <div v-else class='tags'>
-      <div v-if='error'>Loading error</div>
-
       <div v-if='tags' class='tags_list'>
         <router-link class='tags_list_item' v-for='tag in tags' v-bind:key='tag' v-bind:to='{ name: "tag", params: {slug: tag} }'>
           {{ tag }}
         </router-link>
       </div>
     </div>
+
+    <hcv-error v-if='error'></hcv-error>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import HcvLoading from '@/components/Loading';
+import HcvError from '@/components/Error';
 
 export default {
   name: 'HcvTags',
-  components: { HcvLoading },
+  components: { HcvLoading, HcvError },
   computed: {
     ...mapState({
       isLoading: state => state.tags.isLoading,

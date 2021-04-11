@@ -44,6 +44,8 @@
         ></hcv-pagination>
       </div>
     </div>
+
+    <hcv-error v-if='error'></hcv-error>
   </div>
 </template>
 
@@ -53,6 +55,7 @@ import HcvPagination from '@/components/Pagination';
 import { limit } from '@/utils/vars';
 import { stringify, parseUrl } from 'query-string';
 import HcvLoading from '@/components/Loading';
+import HcvError from '@/components/Error'
 
 export default {
   name: 'HcvFeed',
@@ -68,7 +71,7 @@ export default {
       required: true
     }
   },
-  components: { HcvLoading, HcvPagination },
+  components: { HcvLoading, HcvPagination, HcvError },
   computed: {
     ...mapState({
       isLoading: state => state.feed.isLoading,
