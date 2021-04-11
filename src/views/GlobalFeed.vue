@@ -1,8 +1,6 @@
 <template>
   <div class='container'>
     <div class='row feed'>
-      <div class='feed_title'>All articles</div>
-
       <div class='col s12 feed_content'>
         <div class='col s8 feed_content_articles'>
           <hcv-feed v-bind:api-url='apiUrl'></hcv-feed>

@@ -1,45 +1,48 @@
 <template>
-  <div class='col s12 articles'>
-    <div v-if='isLoading'>Loading...</div>
+  <div>
+    <hcv-loading v-if='isLoading'>Loading...</hcv-loading>
 
-    <div v-if='error'>Error</div>
+    <div v-else class='col s12 articles'>
 
-    <div v-if='data'>
-      <div class='articles_preview' v-for='(article, index) in data.articles' v-bind:key='index'>
-        <div class='articles_preview_info'>
-          <router-link class='articles_preview_info_nickname __link'
-                       v-bind:to='{name: "userProfile", params: { slug: article.author.username }}'>
-            {{ article.author.username }}
+      <div v-if='error'>Error</div>
+
+      <div v-if='data'>
+        <div class='articles_preview' v-for='(article, index) in data.articles' v-bind:key='index'>
+          <div class='articles_preview_info'>
+            <router-link class='articles_preview_info_nickname __link'
+                         v-bind:to='{name: "userProfile", params: { slug: article.author.username }}'>
+              {{ article.author.username }}
+            </router-link>
+            <span class='articles_preview_info_date'>{{ article.createdAt }}</span>
+          </div>
+
+          <router-link v-bind:to='{name: "article", params: { slug: article.slug }}'
+                       class='articles_preview_title __link'>
+            {{ article.title }}
           </router-link>
-          <span class='articles_preview_info_date'>{{ article.createdAt }}</span>
+
+          <div class='articles_preview_tags'>
+            <span>{{ article.tagList }}</span>
+            <span>test</span>
+            <span>test</span>
+          </div>
+
+          <div class='articles_preview_descr'>{{ article.description }}</div>
+
+          <router-link v-bind:to='{name: "article", params: { slug: article.slug }}' class='articles_preview_btn'>Читать
+            дальше
+          </router-link>
+
+          <div class='articles_preview_likes'></div>
         </div>
 
-        <router-link v-bind:to='{name: "article", params: { slug: article.slug }}'
-                     class='articles_preview_title __link'>
-          {{ article.title }}
-        </router-link>
-
-        <div class='articles_preview_tags'>
-          <span>{{ article.tagList }}</span>
-          <span>test</span>
-          <span>test</span>
-        </div>
-
-        <div class='articles_preview_descr'>{{ article.description }}</div>
-
-        <router-link v-bind:to='{name: "article", params: { slug: article.slug }}' class='articles_preview_btn'>Читать
-          дальше
-        </router-link>
-
-        <div class='articles_preview_likes'></div>
+        <hcv-pagination
+          v-bind:total='data.articlesCount'
+          v-bind:limit='limit'
+          v-bind:current-page='currentPage'
+          v-bind:url='baseUrl'
+        ></hcv-pagination>
       </div>
-
-      <hcv-pagination
-        v-bind:total='data.articlesCount'
-        v-bind:limit='limit'
-        v-bind:current-page='currentPage'
-        v-bind:url='baseUrl'
-      ></hcv-pagination>
     </div>
   </div>
 </template>
@@ -49,6 +52,7 @@ import { mapState } from 'vuex';
 import HcvPagination from '@/components/Pagination';
 import { limit } from '@/utils/vars';
 import { stringify, parseUrl } from 'query-string';
+import HcvLoading from '@/components/Loading';
 
 export default {
   name: 'HcvFeed',
@@ -64,7 +68,7 @@ export default {
       required: true
     }
   },
-  components: { HcvPagination },
+  components: { HcvLoading, HcvPagination },
   computed: {
     ...mapState({
       isLoading: state => state.feed.isLoading,
