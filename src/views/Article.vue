@@ -1,9 +1,11 @@
 <template>
   <div>
-    <hcv-loading v-if='isLoading'>Loading...</hcv-loading>
-
-    <div v-else class='row'>
+    <div class='row'>
       <div class='col s10 offset-s1 article'>
+        <hcv-loading class='article_loader' v-if='isLoading'>Loading...</hcv-loading>
+
+        <hcv-error v-if='error'></hcv-error>
+
         <div v-if='article'>
           <div class='article_descr_info'>
             <router-link class='article_descr_info_nickname __link' v-bind:to='{name: "userProfile", params: { slug: article.author.username }}'>
@@ -12,9 +14,9 @@
             <span class='article_descr_info_date'>{{ article.createdAt }}</span>
           </div>
 
-          <router-link v-bind:to='{name: "article", params: { slug: article.slug }}' class='article_descr_title __link'>
+          <div class='article_descr_title'>
             {{ article.title }}
-          </router-link>
+          </div>
 
           <div class='article_descr_tags'>
             <span>{{ article.tagList }}</span>
@@ -30,8 +32,6 @@
         </div>
       </div>
     </div>
-
-    <hcv-error v-if='error'></hcv-error>
   </div>
 </template>
 
@@ -57,36 +57,39 @@ export default {
 </script>
 
 <style scoped lang='sass'>
-.article
-  padding: 50px 0px
-  .__link
-    display: inline-block
-    text-decoration: none
-    transition: all .25s ease-in-out
-    &:hover
-      opacity: .9
-  .article_descr
-    margin-bottom: 70px
-    &_info
-      margin-bottom: 10px
-      &_nickname
-        font-size: 15px
-        margin-right: 15px
-        color: $link-color
-      &_date
-        font-size: 13px
-    &_title
-      font-size: 38px
-      color: $base-text
-    &_tags
-      font-size: 12px
-      color: #5e6973
-      margin-bottom: 30px
-      span
-        margin-right: 10px
-    &_text
-      font-size: 16px
-      line-height: 1.4
-      color: $base-text
-      margin-bottom: 30px
+  .col.article
+    padding: 50px 0px
+    &_loader
+      margin-top: 15%
+      margin-left: 10%
+    .__link
+      display: inline-block
+      text-decoration: none
+      transition: all .25s ease-in-out
+      &:hover
+        opacity: .9
+    .article_descr
+      margin-bottom: 70px
+      &_info
+        margin-bottom: 10px
+        &_nickname
+          font-size: 15px
+          margin-right: 15px
+          color: $link-color
+        &_date
+          font-size: 13px
+      &_title
+        font-size: 38px
+        color: $base-text
+      &_tags
+        font-size: 12px
+        color: #5e6973
+        margin-bottom: 30px
+        span
+          margin-right: 10px
+      &_text
+        font-size: 16px
+        line-height: 1.4
+        color: $base-text
+        margin-bottom: 30px
 </style>
