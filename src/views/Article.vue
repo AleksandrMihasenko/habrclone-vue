@@ -30,7 +30,9 @@
           </div>
 
           <div class='article_descr_tags'>
-            <span>{{ article.tagList }}</span>
+            <span>
+              <hcv-tags-list v-bind:tags='article.tagList'></hcv-tags-list>
+            </span>
           </div>
 
           <div class='article_descr_text'>{{ article.body }}</div>
@@ -38,7 +40,9 @@
           <div class='article_descr_likes'></div>
 
           <div class='article_descr_tags'>
-            <span>{{ article.tagList }}</span>
+            <span>
+              <hcv-tags-list v-bind:tags='article.tagList'></hcv-tags-list>
+            </span>
           </div>
         </div>
       </div>
@@ -51,10 +55,11 @@ import { mapState } from 'vuex';
 import { mapGetters } from 'vuex';
 import HcvLoading from '@/components/Loading';
 import HcvError from '@/components/Error';
+import HcvTagsList from '@/components/TagsList'
 
 export default {
   name: 'HcvArticle',
-  components: { HcvLoading, HcvError },
+  components: { HcvLoading, HcvError, HcvTagsList },
   computed: {
     ...mapState({
       isLoading: state => state.article.isLoading,

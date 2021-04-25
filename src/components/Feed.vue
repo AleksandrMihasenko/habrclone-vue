@@ -19,7 +19,9 @@
           </router-link>
 
           <div class='articles_preview_tags'>
-            <span>{{ article.tagList }}</span>
+            <span>
+              <hcv-tags-list v-bind:tags='article.tagList'></hcv-tags-list>
+            </span>
           </div>
 
           <div class='articles_preview_descr'>{{ article.description }}</div>
@@ -49,6 +51,7 @@ import { mapState } from 'vuex';
 import HcvPagination from '@/components/Pagination';
 import HcvLoading from '@/components/Loading';
 import HcvError from '@/components/Error';
+import HcvTagsList from '@/components/TagsList'
 import { limit } from '@/utils/vars';
 import { stringify, parseUrl } from 'query-string';
 
@@ -66,7 +69,12 @@ export default {
       required: true
     }
   },
-  components: { HcvLoading, HcvPagination, HcvError },
+  components: {
+    HcvLoading,
+    HcvPagination,
+    HcvError,
+    HcvTagsList
+  },
   computed: {
     ...mapState({
       isLoading: state => state.feed.isLoading,
