@@ -10,10 +10,10 @@
 
           <template v-if='isLogIn'>
             <li>
-              <router-link v-bind:to='{name: "createArticle"}'>Новая статья</router-link>
+              <router-link v-bind:to='{name: "createArticle"}' active-class='active'>Новая статья</router-link>
             </li>
             <li>
-              <router-link v-bind:to='{name: "settings"}'>Настройки</router-link>
+              <router-link v-bind:to='{name: "settings"}' active-class='active'>Настройки</router-link>
             </li>
             <li>
               <router-link v-bind:to='{name: "userProfile, params: {slug: currentUser.username}"}'>
@@ -52,13 +52,10 @@ export default {
 </script>
 
 <style lang='sass'>
-
-.active
-  background-color: #29333b
-
 .nav-wrapper
   background-color: #303b44
-
+  .active
+    background-color: #29333b
   .brand-logo
     left: 1%
 </style>
