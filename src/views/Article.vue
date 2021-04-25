@@ -14,6 +14,17 @@
             <span class='article_descr_info_date'>{{ article.createdAt }}</span>
           </div>
 
+          <div class='article_descr_control'>
+            <router-link class='article_descr_control_edit __btn' v-bind:to='{ name: "editArticle", params: { slug: article.slug } }'>
+              <i class="material-icons">border_color</i>
+              Редактировать
+            </router-link>
+            <button class='article_descr_control_delete __btn'>
+              <i class="material-icons">delete</i>
+              Удалить
+            </button>
+          </div>
+
           <div class='article_descr_title'>
             {{ article.title }}
           </div>
@@ -59,7 +70,7 @@ export default {
 <style scoped lang='sass'>
   .col.article
     padding: 50px 0px
-    &_loader
+    .article_loader
       margin-top: 15%
       margin-left: 10%
     .__link
@@ -71,13 +82,35 @@ export default {
     .article_descr
       margin-bottom: 70px
       &_info
-        margin-bottom: 10px
+        margin-bottom: 30px
         &_nickname
           font-size: 15px
           margin-right: 15px
           color: $link-color
         &_date
           font-size: 13px
+      &_control
+        margin-bottom: 30px
+        .__btn
+          display: inline-flex
+          align-items: center
+          padding: 4px 24px 6px
+          border-radius: 4px
+          cursor: pointer
+          transition: all .25s ease-in-out
+        &_edit
+          border: 1px solid $link-color
+          margin-right: 15px
+          color: $link-color
+          &:hover
+            background-color: $btn-color
+            border: 1px solid $btn-color
+            color: $clear
+        &_delete
+          color: $clear
+          background-color: $base-text
+          &:hover
+            opacity: .9
       &_title
         font-size: 38px
         color: $base-text
