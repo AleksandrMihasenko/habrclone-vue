@@ -47,13 +47,13 @@ const routes = [
     component: GlobalFeed
   },
   {
-    path: '/articles/:slug',
+    path: '/article/:slug',
     name: 'article',
     meta: { layout: "main" },
     component: Article
   },
   {
-    path: '/articles/:slug/edit',
+    path: '/article/:slug/edit',
     name: 'editArticle',
     meta: { layout: "main" },
     component: GlobalFeed

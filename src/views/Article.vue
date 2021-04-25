@@ -14,12 +14,12 @@
             <span class='article_descr_info_date'>{{ article.createdAt }}</span>
           </div>
 
-          <div class='article_descr_control'>
+          <div class='article_descr_control' v-if='isAuthor'>
             <router-link class='article_descr_control_edit __btn' v-bind:to='{ name: "editArticle", params: { slug: article.slug } }'>
               <i class="material-icons">border_color</i>
               Редактировать
             </router-link>
-            <button class='article_descr_control_delete __btn'>
+            <button class='article_descr_control_delete __btn' v-on:click='deleteArticle'>
               <i class="material-icons">delete</i>
               Удалить
             </button>
@@ -33,7 +33,7 @@
             <span>{{ article.tagList }}</span>
           </div>
 
-          <div class='article_descr_text'>{{ article.description }}</div>
+          <div class='article_descr_text'>{{ article.body }}</div>
 
           <div class='article_descr_likes'></div>
 
@@ -48,6 +48,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 import HcvLoading from '@/components/Loading';
 import HcvError from '@/components/Error';
 
@@ -59,10 +60,27 @@ export default {
       isLoading: state => state.article.isLoading,
       error: state => state.article.error,
       article: state => state.article.data
-    })
+    }),
+    ...mapGetters({
+      currentUser: 'currentUser'
+    }),
+    isAuthor() {
+      if (!this.currentUser || !this.article) {
+        return false;
+      }
+      return this.currentUser.username === this.article.author.username;
+    }
   },
   mounted() {
     this.$store.dispatch('getArticle', { slug: this.$route.params.slug });
+  },
+  methods: {
+    deleteArticle() {
+      this.$store.dispatch('deleteArticle', { slug: this.$route.params.slug })
+      .then(() =>
+        this.$router.push({ name: 'globalFeed' })
+      );
+    }
   }
 };
 </script>
@@ -82,7 +100,7 @@ export default {
     .article_descr
       margin-bottom: 70px
       &_info
-        margin-bottom: 30px
+        margin-bottom: 10px
         &_nickname
           font-size: 15px
           margin-right: 15px
@@ -90,7 +108,7 @@ export default {
         &_date
           font-size: 13px
       &_control
-        margin-bottom: 30px
+        margin: 20px 0px 30px
         .__btn
           display: inline-flex
           align-items: center

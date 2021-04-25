@@ -17,7 +17,10 @@ const mutations = {
   },
   getArticleFailure(state) {
     state.isLoading = false;
-  }
+  },
+  deleteArticleStart() {},
+  deleteArticleSuccess() {},
+  deleteArticleFailure() {}
 };
 
 const actions = {
@@ -31,6 +34,19 @@ const actions = {
       })
       .catch(() => {
         context.commit('getArticleFailure');
+      });
+    });
+  },
+  deleteArticle(context, { slug }) {
+    return new Promise(resolve => {
+      context.commit('deleteArticleStart', slug);
+      articleApi.deleteArticle(slug)
+      .then(() => {
+        context.commit('deleteArticleSuccess');
+        resolve();
+      })
+      .catch(() => {
+        context.commit('deleteArticleFailure');
       });
     });
   }
