@@ -36,10 +36,6 @@ export default {
       type: Object,
       required: true
     },
-    errors: {
-      type: Object,
-      required: false
-    },
     isSubmitting: {
       type: Boolean,
       required: true
@@ -59,7 +55,7 @@ export default {
         title: this.title,
         description: this.description,
         body: this.body,
-        tagList: this.tagList
+        tagList: this.tagList.split(' ')
       };
       this.$emit('articleSubmit', form);
     }
@@ -77,7 +73,7 @@ export default {
       margin-bottom: 15px
       .article-input
         border-radius: 4px
-        padding: 0px 25px
+        padding: 0 25px
         border: 1px solid $form-border
         box-sizing: border-box
     &_body

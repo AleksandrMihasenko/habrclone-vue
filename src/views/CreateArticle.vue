@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div>Create article</div>
-    <hcv-article-form v-bind:initial-values='initialValues' v-bind:is-submitting='isSubmitting' v-on:articleSubmit='submitHandler'></hcv-article-form>
-  </div>
+  <hcv-article-form v-bind:initial-values='initialValues' v-bind:is-submitting='isSubmitting' v-on:articleSubmit='submitHandler'></hcv-article-form>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import HcvArticleForm from '@/components/ArticleForm';
 
 export default {
@@ -18,14 +16,20 @@ export default {
         description: '',
         body: '',
         tagList: []
-      },
-      validationErrors: null,
-      isSubmitting: false
+      }
     }
   },
+  computed: {
+    ...mapState({
+      isSubmitting: state => state.createArticle.isSubmitting
+    })
+  },
   methods: {
-    submitHandler(data) {
-      console.log('click submit', data);
+    submitHandler(newArticle) {
+      this.$store.dispatch('createArticle', { newArticle })
+        .then(article => {
+          this.$router.push({ name: 'article', params: { slug: article.slug } })
+        })
     }
   }
 };

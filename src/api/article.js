@@ -6,9 +6,16 @@ const getArticle = slug => {
 
 const deleteArticle = slug => {
   return axios.delete(`/articles/${slug}`);
-}
+};
+
+const createArticle = newArticle => {
+  return axios
+    .post('/articles', { article: newArticle })
+    .then(response => response.data.article);
+};
 
 export default {
   getArticle,
-  deleteArticle
+  deleteArticle,
+  createArticle
 };
