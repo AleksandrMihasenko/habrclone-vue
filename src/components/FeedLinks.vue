@@ -61,5 +61,4 @@ export default {
           background-color: transparent
           padding-bottom: 12px
           border-bottom: 4px solid $link-color
-
 </style>

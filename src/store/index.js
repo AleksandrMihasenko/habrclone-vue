@@ -8,6 +8,7 @@ import createArticle from '@/store/modules/createArticle';
 import editArticle from '@/store/modules/editArticle';
 import settings from '@/store/modules/settings';
 import likes from '@/store/modules/likes';
+import userProfile from '@/store/modules/userProfile';
 
 Vue.use(Vuex);
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     createArticle,
     editArticle,
     settings,
-    likes
+    likes,
+    userProfile
   }
 });
