@@ -21,8 +21,10 @@
           <div class='articles_preview_tags'>
             <span>
               <hcv-tags-list v-bind:tags='article.tagList'></hcv-tags-list>
+              <hcv-likes class='articles_preview_tags_likes' v-bind:isLiked='article.favorited' v-bind:article-slug='article.slug' v-bind:likes-count='article.favoritesCount'></hcv-likes>
             </span>
           </div>
+
 
           <div class='articles_preview_descr'>{{ article.description }}</div>
 
@@ -51,7 +53,8 @@ import { mapState } from 'vuex';
 import HcvPagination from '@/components/Pagination';
 import HcvLoading from '@/components/Loading';
 import HcvError from '@/components/Error';
-import HcvTagsList from '@/components/TagsList'
+import HcvTagsList from '@/components/TagsList';
+import HcvLikes from '@/components/Likes';
 import { limit } from '@/utils/vars';
 import { stringify, parseUrl } from 'query-string';
 
@@ -73,7 +76,8 @@ export default {
     HcvLoading,
     HcvPagination,
     HcvError,
-    HcvTagsList
+    HcvTagsList,
+    HcvLikes
   },
   computed: {
     ...mapState({
@@ -114,47 +118,40 @@ export default {
 <style scoped lang='sass'>
 .articles
   font-family: "-apple-system", BlinkMacSystemFont, "Segoe UI", Arial, sans-serif
-
   .__link
     display: inline-block
     text-decoration: none
     transition: all .25s ease-in-out
-
     &:hover
       opacity: .9
-
   .articles_preview
     margin-bottom: 70px
-
     &_info
       margin-bottom: 10px
-
       &_nickname
         font-size: 15px
         margin-right: 15px
         color: $link-color
-
       &_date
         font-size: 13px
-
     &_title
       font-size: 38px
       color: $base-text
-
     &_tags
+      position: relative
       font-size: 12px
       color: #5e6973
       margin-bottom: 30px
-
       span
         margin-right: 10px
-
+        margin-bottom: 5px
+      &_likes
+        margin-top: 5px
     &_descr
       font-size: 16px
       line-height: 1.4
       color: $base-text
       margin-bottom: 30px
-
     &_btn
       display: inline-block
       padding: 10px
@@ -162,7 +159,6 @@ export default {
       border: 1px solid $btn-color
       border-radius: 5px
       transition: all .25s ease-in-out
-
       &:hover
         background-color: $btn-color
         color: $clear
