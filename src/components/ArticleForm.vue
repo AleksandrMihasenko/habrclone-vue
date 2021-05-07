@@ -77,11 +77,11 @@ export default {
         border: 1px solid $form-border
         box-sizing: border-box
     &_body
-        .materialize-textarea
-          border-radius: 4px
-          padding: 15px 25px
-          border: 1px solid $form-border
-          min-height: 150px
+      .materialize-textarea
+        border-radius: 4px
+        padding: 15px 25px
+        border: 1px solid $form-border
+        min-height: 150px
     &_btn
       align-self: flex-end
       display: inline-block

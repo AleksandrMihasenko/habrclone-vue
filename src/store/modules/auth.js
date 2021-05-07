@@ -50,6 +50,15 @@ const mutations = {
     state.isLoading = false;
     state.isLogIn = false;
     state.currentUser = null;
+  },
+  updateCurrentUserStart() {},
+  updateCurrentUserSuccess(state, payload) {
+    state.currentUser = payload;
+  },
+  updateCurrentUserFailure() {},
+  logout(state) {
+    state.isLogIn = false;
+    state.currentUser = null;
   }
 };
 
@@ -117,6 +126,28 @@ const actions = {
         context.commit('getCurrentUserFailure');
       });
     });
+  },
+  updateCurrentUser(context, { currentUserInfo }) {
+    return new Promise((resolve) => {
+      
+      context.commit('updateCurrentUserStart');
+      
+      authApi.updateCurrentUser(currentUserInfo)
+      .then(user => {
+        context.commit('updateCurrentUserSuccess', user);
+        resolve(user);
+      })
+      .catch(errors => {
+        context.commit('updateCurrentUserFailure', errors.response.data.errors);
+      });
+    });
+  },
+  logout(context) {
+    return new Promise(resolve => {
+      setItem('accessToken', '');
+      context.commit('logout');
+      resolve();
+    })
   }
 };
 
