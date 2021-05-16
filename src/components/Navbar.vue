@@ -1,38 +1,76 @@
 <template>
-  <div class='navbar-fixed'>
-    <nav>
-      <div class='nav-wrapper'>
-        <router-link v-bind:to='{ name: "globalFeed" }' class='brand-logo'>Habr clone</router-link>
-        <ul id='nav-mobile' class='right hide-on-med-and-down'>
-          <li>
-            <router-link v-bind:to='{ name: "globalFeed" }' active-class='active' exact>Главная страница</router-link>
-          </li>
+  <div>
+    <div class='navbar-fixed'>
+      <nav>
+        <div class='nav-wrapper'>
+          <router-link v-bind:to='{ name: "globalFeed" }' class='brand-logo'>Habr clone</router-link>
+          <ul id='nav' class='right hide-on-med-and-down'>
+            <li>
+              <router-link v-bind:to='{ name: "globalFeed" }' active-class='active' exact>Главная страница</router-link>
+            </li>
 
-          <template v-if='isLogIn'>
-            <li>
-              <router-link v-bind:to='{ name: "createArticle" }' active-class='active'>Новая статья</router-link>
-            </li>
-            <li>
-              <router-link v-bind:to='{ name: "settings" }' active-class='active'>Настройки</router-link>
-            </li>
-            <li>
-              <router-link v-bind:to='{ name: "userProfile", params: { slug: currentUser.username }}'>
-                {{ currentUser.username }}
-              </router-link>
-            </li>
-          </template>
+            <template v-if='isLogIn'>
+              <li>
+                <router-link v-bind:to='{ name: "createArticle" }' active-class='active'>Новая статья</router-link>
+              </li>
+              <li>
+                <router-link v-bind:to='{ name: "settings" }' active-class='active'>Настройки</router-link>
+              </li>
+              <li>
+                <router-link v-bind:to='{ name: "userProfile", params: { slug: currentUser.username }}'>
+                  {{ currentUser.username }}
+                </router-link>
+              </li>
+            </template>
 
-          <template v-if='isAnonymous'>
+            <template v-if='isAnonymous'>
+              <li>
+                <router-link v-bind:to='{name: "login"}'>Войти</router-link>
+              </li>
+              <li>
+                <router-link v-bind:to='{name: "register"}'>Зарегистрироваться</router-link>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class='navbar-fixed __mobile'>
+      <nav>
+        <div class='nav-wrapper'>
+          <router-link v-bind:to='{ name: "globalFeed" }' class='brand-logo'>Habr clone</router-link>
+          <ul id='nav-mobile' class='right hide-on-med-and-down'>
             <li>
-              <router-link v-bind:to='{name: "login"}'>Войти</router-link>
+              <router-link v-bind:to='{ name: "globalFeed" }' active-class='active' exact>Главная страница</router-link>
             </li>
-            <li>
-              <router-link v-bind:to='{name: "register"}'>Зарегистрироваться</router-link>
-            </li>
-          </template>
-        </ul>
-      </div>
-    </nav>
+
+            <template v-if='isLogIn'>
+              <li>
+                <router-link v-bind:to='{ name: "createArticle" }' active-class='active'>Новая статья</router-link>
+              </li>
+              <li>
+                <router-link v-bind:to='{ name: "settings" }' active-class='active'>Настройки</router-link>
+              </li>
+              <li>
+                <router-link v-bind:to='{ name: "userProfile", params: { slug: currentUser.username }}'>
+                  {{ currentUser.username }}
+                </router-link>
+              </li>
+            </template>
+
+            <template v-if='isAnonymous'>
+              <li>
+                <router-link v-bind:to='{name: "login"}'>Войти</router-link>
+              </li>
+              <li>
+                <router-link v-bind:to='{name: "register"}'>Зарегистрироваться</router-link>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </nav>
+    </div>
   </div>
 </template>
 
@@ -52,10 +90,25 @@ export default {
 </script>
 
 <style lang='sass'>
+.navbar-fixed.__mobile
+  display: none
 .nav-wrapper
   background-color: #303b44
   .active
     background-color: #29333b
   .brand-logo
     left: 1%
+
+@media (max-width: 768px)
+  .nav-wrapper
+    .brand-logo
+      left: 11%
+    #nav
+      display: block !important
+
+@media (max-width: 400px)
+  .navbar-fixed
+    display: none
+  .navbar-fixed.__mobile
+    display: block
 </style>

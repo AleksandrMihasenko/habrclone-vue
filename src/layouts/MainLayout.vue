@@ -14,5 +14,3 @@ export default {
   components: { HcvNavbar }
 };
 </script>
-
-<style></style>
