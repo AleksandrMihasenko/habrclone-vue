@@ -2,13 +2,13 @@
   <div class='container'>
     <div class='row feed'>
       <div class='col s12 feed_content'>
-        <div class='col s8 feed_content_articles'>
+        <div class='col s12 m8 feed_content_articles'>
           <hcv-feed-links v-bind:tag-name='tagName'></hcv-feed-links>
 
           <hcv-feed v-bind:api-url='apiUrl'></hcv-feed>
         </div>
 
-        <div class='col s4'>
+        <div class='col s12 m4'>
           <hcv-tags></hcv-tags>
         </div>
       </div>
@@ -65,4 +65,13 @@ export default {
       padding: 20px
       background-color: #dedede
       border-radius: 6px
+
+@media (max-width: 400px)
+  .feed
+    .col.feed_content
+      display: flex
+      flex-direction: column-reverse
+      &_articles
+        width: 100%
+        margin: 30px 0
 </style>
