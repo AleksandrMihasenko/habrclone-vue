@@ -1,7 +1,7 @@
 <template>
   <div v-if='currentUser' class='container'>
     <div class='row'>
-      <form class='settings-form offset-s2 col s8'>
+      <form class='settings-form offset-m2 col s12 m8'>
         <h1 class='settings-form_title'>Настройки пользователя</h1>
 
         <div class='settings-form_username input-field'>
