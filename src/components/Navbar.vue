@@ -36,11 +36,15 @@
       </nav>
     </div>
 
-    <div class='navbar-fixed __mobile'>
+    <div class='navbar_mobile'>
       <nav>
-        <div class='nav-wrapper'>
-          <router-link v-bind:to='{ name: "globalFeed" }' class='brand-logo'>Habr clone</router-link>
-          <ul id='nav-mobile' class='right hide-on-med-and-down'>
+        <div class='navbar_mobile_wrapper'>
+          <router-link v-bind:to='{ name: "globalFeed" }' class='navbar_mobile_wrapper_brand-logo'>Habr clone</router-link>
+          <div class='navbar_mobile_wrapper_hamburger'>
+            <i class="large material-icons">dehaze</i>
+            <i class="large material-icons">close</i>
+          </div>
+          <ul class='navbar_mobile_wrapper_links'>
             <li>
               <router-link v-bind:to='{ name: "globalFeed" }' active-class='active' exact>Главная страница</router-link>
             </li>
@@ -90,7 +94,7 @@ export default {
 </script>
 
 <style lang='sass'>
-.navbar-fixed.__mobile
+.navbar_mobile
   display: none
 .nav-wrapper
   background-color: #303b44
@@ -109,6 +113,29 @@ export default {
 @media (max-width: 400px)
   .navbar-fixed
     display: none
-  .navbar-fixed.__mobile
+  .navbar_mobile
     display: block
+    &_wrapper
+      position: relative
+      background-color: #303b44
+      &_brand-logo
+        margin-left: 11%
+        font-size: 38px
+      &_hamburger
+        position: absolute
+        top: 0
+        right: 20px
+      &_links
+        display: none
+        flex-direction: column
+        width: 100%
+        height: 100vh
+        position: absolute
+        background-color: $base-text
+        z-index: 1
+        opacity: .95
+        li
+          a
+            font-size: 24px
+            padding: 20px 30px
 </style>
