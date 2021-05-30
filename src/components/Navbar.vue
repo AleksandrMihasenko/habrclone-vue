@@ -136,18 +136,21 @@ export default {
         top: 0
         right: 20px
       &_links
-        display: none
         flex-direction: column
         width: 100%
         height: 100vh
+        padding-top: 50px
         position: absolute
+        transform: translateX(-100%)
         background-color: $base-text
         z-index: 1
-        opacity: .95
+        opacity: 0
+        transition: all .6s ease-out
         li
           a
             font-size: 24px
             padding: 20px 30px
         &.__open
-          display: block
+          opacity: .95
+          transform: translateX(0)
 </style>
