@@ -40,11 +40,11 @@
       <nav>
         <div class='navbar_mobile_wrapper'>
           <router-link v-bind:to='{ name: "globalFeed" }' class='navbar_mobile_wrapper_brand-logo'>Habr clone</router-link>
-          <div class='navbar_mobile_wrapper_hamburger'>
-            <i class="large material-icons">dehaze</i>
-            <i class="large material-icons">close</i>
+          <div class='navbar_mobile_wrapper_hamburger' v-on:click='hamburgerHandler'>
+            <i v-if='!isMobileMenuOpen' class="large material-icons">dehaze</i>
+            <i v-else class="large material-icons">close</i>
           </div>
-          <ul class='navbar_mobile_wrapper_links'>
+          <ul v-bind:class='{__open: isMobileMenuOpen}' class='navbar_mobile_wrapper_links'>
             <li>
               <router-link v-bind:to='{ name: "globalFeed" }' active-class='active' exact>Главная страница</router-link>
             </li>
@@ -83,12 +83,22 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'HcvNavbar',
+  data() {
+    return {
+      isMobileMenuOpen: false
+    }
+  },
   computed: {
     ...mapGetters({
       currentUser: 'currentUser',
       isLogIn: 'isLogIn',
       isAnonymous: 'isAnonymous'
     })
+  },
+  methods: {
+    hamburgerHandler() {
+      this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    }
   }
 };
 </script>
@@ -138,4 +148,6 @@ export default {
           a
             font-size: 24px
             padding: 20px 30px
+        &.__open
+          display: block
 </style>
